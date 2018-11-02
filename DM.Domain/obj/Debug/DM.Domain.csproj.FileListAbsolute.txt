@@ -1,4 +1,0 @@
-D:\Project\DocumentManage\DM.Domain\bin\Debug\DM.Domain.dll
-D:\Project\DocumentManage\DM.Domain\bin\Debug\DM.Domain.pdb
-D:\Project\DocumentManage\DM.Domain\obj\Debug\DM.Domain.dll
-D:\Project\DocumentManage\DM.Domain\obj\Debug\DM.Domain.pdb
