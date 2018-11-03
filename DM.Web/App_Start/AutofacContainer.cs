@@ -19,17 +19,18 @@ namespace DM.Web.App_Start
             ContainerBuilder builder = new ContainerBuilder();
             #region 加载Repository
             // 加载数据仓储层的程序集。  
-            Assembly dalAss = Assembly.Load("DM.Repository");  
+            Assembly dalAss = Assembly.Load("DM.Repository");
             Type[] dalTypes = dalAss.GetTypes();
-           
-            builder.RegisterTypes(dalTypes).AsImplementedInterfaces(); 
+            dalTypes = dalTypes.Where(p => typeof(DM.Interface.IDependency).IsAssignableFrom(p)).ToArray();
+            builder.RegisterTypes(dalTypes).AsImplementedInterfaces();
             #endregion
 
             #region 加载Services
             // 加载业务逻辑层的程序集。  
             Assembly bllAss = Assembly.Load("DM.Service");
-            builder.RegisterAssemblyTypes(bllAss).Where(t => typeof(DM.Interface.IDependency).IsAssignableFrom(t));
-
+            Type[] bllTypes = bllAss.GetTypes();
+            bllTypes = bllTypes.Where(p => typeof(DM.Interface.IDependency).IsAssignableFrom(p)).ToArray();
+            builder.RegisterTypes(bllTypes).AsImplementedInterfaces();
             #endregion
 
             Assembly webSystem = Assembly.Load("DM.Web");
