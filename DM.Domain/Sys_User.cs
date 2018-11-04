@@ -10,7 +10,7 @@ namespace DM.Domain
     /// 数据表实体类：用户表 (Sys_User)
     /// </summary>
     [Serializable()]
-    public class Sys_User
+    public class Sys_User:BaseModel
     {
 	   private int _ID;
        /// <summary>
@@ -19,8 +19,16 @@ namespace DM.Domain
        [Key] [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
        public int ID
 	   { 
-            get{return _ID;}
-            set{ _ID=value;}
+            get{
+                    BeforeGetProperty("ID", _ID);
+                    return _ID;
+                }
+            set{
+                    if(!BeforeSetProperty("ID", _ID))
+                        return;
+                     _ID=value;
+                    AfterSetProperty("ID", _ID);
+                }
 		}
 	   private string _Account;
        /// <summary>
@@ -29,8 +37,16 @@ namespace DM.Domain
         
        public string Account
 	   { 
-            get{return _Account;}
-            set{ _Account=value;}
+            get{
+                    BeforeGetProperty("Account", _Account);
+                    return _Account;
+                }
+            set{
+                    if(!BeforeSetProperty("Account", _Account))
+                        return;
+                     _Account=value;
+                    AfterSetProperty("Account", _Account);
+                }
 		}
 	   private string _Password;
        /// <summary>
@@ -39,8 +55,16 @@ namespace DM.Domain
         
        public string Password
 	   { 
-            get{return _Password;}
-            set{ _Password=value;}
+            get{
+                    BeforeGetProperty("Password", _Password);
+                    return _Password;
+                }
+            set{
+                    if(!BeforeSetProperty("Password", _Password))
+                        return;
+                     _Password=value;
+                    AfterSetProperty("Password", _Password);
+                }
 		}
 	   private string _UserName;
        /// <summary>
@@ -49,8 +73,16 @@ namespace DM.Domain
         
        public string UserName
 	   { 
-            get{return _UserName;}
-            set{ _UserName=value;}
+            get{
+                    BeforeGetProperty("UserName", _UserName);
+                    return _UserName;
+                }
+            set{
+                    if(!BeforeSetProperty("UserName", _UserName))
+                        return;
+                     _UserName=value;
+                    AfterSetProperty("UserName", _UserName);
+                }
 		}
 	   private decimal _age;
        /// <summary>
@@ -59,8 +91,16 @@ namespace DM.Domain
         
        public decimal age
 	   { 
-            get{return _age;}
-            set{ _age=value;}
+            get{
+                    BeforeGetProperty("age", _age);
+                    return _age;
+                }
+            set{
+                    if(!BeforeSetProperty("age", _age))
+                        return;
+                     _age=value;
+                    AfterSetProperty("age", _age);
+                }
 		}
 	   private string _address;
        /// <summary>
@@ -69,20 +109,48 @@ namespace DM.Domain
         
        public string address
 	   { 
-            get{return _address;}
-            set{ _address=value;}
+            get{
+                    BeforeGetProperty("address", _address);
+                    return _address;
+                }
+            set{
+                    if(!BeforeSetProperty("address", _address))
+                        return;
+                     _address=value;
+                    AfterSetProperty("address", _address);
+                }
 		}
 	   private List<Sys_Role> _lstSys_Roles = new List<Sys_Role>();     
        public List<Sys_Role> LstSys_Roles
 	   { 
-            get{return _lstSys_Roles;}
-            set{ _lstSys_Roles=value;}
+            get
+            {
+                BeforeGetProperty("LstSys_Roles",_lstSys_Roles);
+                return _lstSys_Roles;
+            }
+            set
+            { 
+                if(!BeforeSetProperty("LstSys_Roles",_lstSys_Roles))
+                    return;
+                _lstSys_Roles=value;
+                AfterSetProperty("LstSys_Roles",_lstSys_Roles);
+            }
 		}
 	   private List<Sys_Test> _lstSys_Tests = new List<Sys_Test>();     
        public List<Sys_Test> LstSys_Tests
 	   { 
-            get{return _lstSys_Tests;}
-            set{ _lstSys_Tests=value;}
+            get
+            {
+                BeforeGetProperty("LstSys_Tests",_lstSys_Tests);
+                return _lstSys_Tests;
+            }
+            set
+            { 
+                if(!BeforeSetProperty("LstSys_Tests",_lstSys_Tests))
+                    return;
+                _lstSys_Tests=value;
+                AfterSetProperty("LstSys_Tests",_lstSys_Tests);
+            }
 		}
     }
 }
