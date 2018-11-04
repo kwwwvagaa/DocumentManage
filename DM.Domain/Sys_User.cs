@@ -3,7 +3,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace Model
+using System.Collections.Generic;
+namespace DM.Domain
 {
     /// <summary>	
     /// 数据表实体类：用户表 (Sys_User)
@@ -70,6 +71,18 @@ namespace Model
 	   { 
             get{return _address;}
             set{ _address=value;}
+		}
+	   private List<Sys_Role> _lstSys_Roles = new List<Sys_Role>();     
+       public List<Sys_Role> LstSys_Roles
+	   { 
+            get{return _lstSys_Roles;}
+            set{ _lstSys_Roles=value;}
+		}
+	   private List<Sys_Test> _lstSys_Tests = new List<Sys_Test>();     
+       public List<Sys_Test> LstSys_Tests
+	   { 
+            get{return _lstSys_Tests;}
+            set{ _lstSys_Tests=value;}
 		}
     }
 }
