@@ -20,13 +20,7 @@ namespace DM.Repository
     {
         private DMDbContext dbcontext = new DMDbContext();
         private DbTransaction dbTransaction { get; set; }
-        /// <summary>
-        /// 功能描述:仓储实现基类
-        /// 作　　者:黄正辉
-        /// 创建日期:2018-11-02 21:05:27
-        /// 任务编号:档案管理系统
-        /// </summary>
-        /// <returns>返回值</returns>
+        
         public IRepositoryBase BeginTrans()
         {
             DbConnection dbConnection = ((IObjectContextAdapter)dbcontext).ObjectContext.Connection;
@@ -37,6 +31,25 @@ namespace DM.Repository
             dbTransaction = dbConnection.BeginTransaction();
             return this;
         }
+        public IRepositoryBase RollbackTrans()
+        {
+            try
+            {             
+                if (dbTransaction != null)
+                {
+                    dbTransaction.Rollback();
+                }
+                return this;
+            }
+            catch (Exception)
+            {
+                if (dbTransaction != null)
+                {
+                    this.dbTransaction.Rollback();
+                }
+                throw;
+            }            
+        }      
         public int Commit()
         {
             try
@@ -189,5 +202,8 @@ namespace DM.Repository
             tempData = tempData.Skip<TEntity>(pagination.rows * (pagination.page - 1)).Take<TEntity>(pagination.rows).AsQueryable();
             return tempData.ToList();
         }
+
+
+     
     }
 }

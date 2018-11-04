@@ -25,6 +25,7 @@ namespace DM.Interface.IRepository
     public interface IRepositoryBase : IDisposable
     {
         IRepositoryBase BeginTrans();
+        IRepositoryBase RollbackTrans();
         int Commit();
         int Insert<TEntity>(TEntity entity) where TEntity : class;
         int Insert<TEntity>(List<TEntity> entitys) where TEntity : class;

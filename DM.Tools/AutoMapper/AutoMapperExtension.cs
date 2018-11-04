@@ -1,6 +1,11 @@
-/// <summary>
-    /// AutoMapper扩展方法
-    /// </summary>
+using AutoMapper;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using AutoMapper.Configuration;
+
+namespace DM.Tools.AutoMapper
+{
     public static class AutoMapperExtension
     {
         /// <summary>
@@ -13,7 +18,8 @@
         {
             if (self == null)
                 throw new ArgumentNullException();
-            Mapper.CreateMap(self.GetType(), typeof(TResult));
+            Mapper.Initialize(x => x.CreateMap(self.GetType(), typeof(TResult)));
+
             return (List<TResult>)Mapper.Map(self, self.GetType(), typeof(List<TResult>));
         }
         /// <summary>
@@ -26,8 +32,9 @@
         {
             if (self == null)
                 throw new ArgumentNullException();
-            Mapper.CreateMap(self.GetType(), typeof(TResult));
+            Mapper.Initialize(x => x.CreateMap(self.GetType(), typeof(TResult)));          
             return (TResult)Mapper.Map(self, self.GetType(), typeof(TResult));
         }
 
     }
+}
