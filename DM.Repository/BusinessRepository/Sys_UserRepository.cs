@@ -16,14 +16,14 @@ using System.Data.Common;
 using DM.Domain;
 using DM.Tools;
 using DM.Interface;
-using DM.Interface.IService;
+using DM.Interface.IRepository;
 
-namespace DM.Service.BusinessRepository
+namespace DM.Repository.BusinessRepository
 {
     /// <summary>
-    /// 业务实现：用户表 (Sys_User)
+    /// 仓储实现：用户表 (Sys_User)
     /// </summary>
-    public partial class Sys_UserService :ServiceBase<Sys_User>,  ISys_UserService,IDependency
+    public partial class Sys_UserRepository :RepositoryBase<Sys_User>,  ISys_UserRepository,IDependency
     {
         /// <summary>
         /// 插入一个数据

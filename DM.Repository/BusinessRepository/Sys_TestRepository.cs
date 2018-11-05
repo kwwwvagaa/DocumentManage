@@ -16,21 +16,21 @@ using System.Data.Common;
 using DM.Domain;
 using DM.Tools;
 using DM.Interface;
-using DM.Interface.IService;
+using DM.Interface.IRepository;
 
-namespace DM.Service.BusinessRepository
+namespace DM.Repository.BusinessRepository
 {
     /// <summary>
-    /// 业务实现：用户表 (Sys_User)
+    /// 仓储实现： (Sys_Test)
     /// </summary>
-    public partial class Sys_UserService :ServiceBase<Sys_User>,  ISys_UserService,IDependency
+    public partial class Sys_TestRepository :RepositoryBase<Sys_Test>,  ISys_TestRepository,IDependency
     {
         /// <summary>
         /// 插入一个数据
         /// </summary>
         /// <param name="entity">实体</param>
         /// <returns>受影响行数</returns>
-        public virtual int Insert(Sys_User entity)
+        public virtual int Insert(Sys_Test entity)
         {
             return base.Insert(entity);
         }
@@ -39,7 +39,7 @@ namespace DM.Service.BusinessRepository
         /// </summary>
         /// <param name="entity">实体列表</param>
         /// <returns>受影响行数</returns>
-        public virtual int Insert(List<Sys_User> entitys)
+        public virtual int Insert(List<Sys_Test> entitys)
         {
             return base.Insert(entitys);
         }
@@ -48,7 +48,7 @@ namespace DM.Service.BusinessRepository
         /// </summary>
         /// <param name="entity">实体</param>
         /// <returns>受影响行数</returns>
-        public virtual int Update(Sys_User entity)
+        public virtual int Update(Sys_Test entity)
         {
             return base.Update(entity);
         }
@@ -57,7 +57,7 @@ namespace DM.Service.BusinessRepository
         /// </summary>
         /// <param name="entity">实体</param>
         /// <returns>受影响行数</returns>
-        public virtual int Delete(Sys_User entity)
+        public virtual int Delete(Sys_Test entity)
         {
             return base.Delete(entity);
         }
@@ -66,7 +66,7 @@ namespace DM.Service.BusinessRepository
         /// </summary>
         /// <param name="predicate">实体</param>
         /// <returns>受影响行数</returns>
-        public virtual int Delete(Expression<Func<Sys_User, bool>> predicate)
+        public virtual int Delete(Expression<Func<Sys_Test, bool>> predicate)
         {
             return base.Delete(predicate);
         }
@@ -75,7 +75,7 @@ namespace DM.Service.BusinessRepository
         /// </summary>
         /// <param name="keyValue">主键值</param>
         /// <returns>实体</returns>
-        public virtual Sys_User FindEntity(object keyValue)
+        public virtual Sys_Test FindEntity(object keyValue)
         {
             return base.FindEntity(keyValue);
         }
@@ -84,7 +84,7 @@ namespace DM.Service.BusinessRepository
         /// </summary>
         /// <param name="predicate">表达式</param>
         /// <returns>实体</returns>
-        public virtual Sys_User FindEntity(Expression<Func<Sys_User, bool>> predicate)
+        public virtual Sys_Test FindEntity(Expression<Func<Sys_Test, bool>> predicate)
         {
             return base.FindEntity(predicate);
         }
@@ -92,7 +92,7 @@ namespace DM.Service.BusinessRepository
         /// 查询IQueryable列表
         /// </summary>
         /// <returns>IQueryable列表</returns>
-        public virtual IQueryable<Sys_User> IQueryable()
+        public virtual IQueryable<Sys_Test> IQueryable()
         {
             return base.IQueryable();
         }
@@ -101,7 +101,7 @@ namespace DM.Service.BusinessRepository
         /// </summary>
         /// <param name="predicate">表达式</param>
         /// <returns>IQueryable列表</returns>
-        public virtual IQueryable<Sys_User> IQueryable(Expression<Func<Sys_User, bool>> predicate)
+        public virtual IQueryable<Sys_Test> IQueryable(Expression<Func<Sys_Test, bool>> predicate)
         {
             return base.IQueryable(predicate);
         }
@@ -110,7 +110,7 @@ namespace DM.Service.BusinessRepository
         /// </summary>
         /// <param name="strSql">Sql</param>
         /// <returns>数据列表</returns>
-        public virtual List<Sys_User> FindList(string strSql)
+        public virtual List<Sys_Test> FindList(string strSql)
         {
             return base.FindList(strSql);
         }
@@ -120,7 +120,7 @@ namespace DM.Service.BusinessRepository
         /// <param name="strSql">Sql</param>
         /// <param name="dbParameter">参数列表</param>
         /// <returns>数据列表</returns>
-        public virtual List<Sys_User> FindList(string strSql, DbParameter[] dbParameter)
+        public virtual List<Sys_Test> FindList(string strSql, DbParameter[] dbParameter)
         {
             return base.FindList(strSql,dbParameter);
         }
@@ -129,7 +129,7 @@ namespace DM.Service.BusinessRepository
         /// </summary>
         /// <param name="pagination">分页参数</param>
         /// <returns>数据列表</returns>
-        public virtual List<Sys_User> FindList(Pagination pagination)
+        public virtual List<Sys_Test> FindList(Pagination pagination)
         {
             return base.FindList(pagination);
         }
@@ -139,7 +139,7 @@ namespace DM.Service.BusinessRepository
         /// <param name="predicate">表达式</param>
         /// <param name="pagination">分页参数</param>
         /// <returns>数据列表</returns>
-        public virtual List<Sys_User> FindList(Expression<Func<Sys_User, bool>> predicate, Pagination pagination)
+        public virtual List<Sys_Test> FindList(Expression<Func<Sys_Test, bool>> predicate, Pagination pagination)
         {
             return base.FindList(predicate,pagination);
         }
