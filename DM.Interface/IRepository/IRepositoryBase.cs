@@ -22,24 +22,10 @@ namespace DM.Interface.IRepository
     /// 创建日期:2018-11-02 21:04:21
     /// 任务编号:档案管理系统
     /// </summary>
-    public interface IRepositoryBase : IDisposable
+    public interface IRepositoryBase : IBase, IDisposable
     {
         IRepositoryBase BeginTrans();
         IRepositoryBase RollbackTrans();
-        int Commit();
-        int Insert<TEntity>(TEntity entity) where TEntity : class;
-        int Insert<TEntity>(List<TEntity> entitys) where TEntity : class;
-        int Update<TEntity>(TEntity entity) where TEntity : class;
-        int Delete<TEntity>(TEntity entity) where TEntity : class;
-        int Delete<TEntity>(Expression<Func<TEntity, bool>> predicate) where TEntity : class;
-        TEntity FindEntity<TEntity>(object keyValue) where TEntity : class;
-
-        TEntity FindEntity<TEntity>(Expression<Func<TEntity, bool>> predicate) where TEntity : class;
-        IQueryable<TEntity> IQueryable<TEntity>() where TEntity : class;
-        IQueryable<TEntity> IQueryable<TEntity>(Expression<Func<TEntity, bool>> predicate) where TEntity : class;
-        List<TEntity> FindList<TEntity>(string strSql) where TEntity : class;
-        List<TEntity> FindList<TEntity>(string strSql, DbParameter[] dbParameter) where TEntity : class;
-        List<TEntity> FindList<TEntity>(Pagination pagination) where TEntity : class,new();
-        List<TEntity> FindList<TEntity>(Expression<Func<TEntity, bool>> predicate, Pagination pagination) where TEntity : class,new();
+        IRepositoryBase CommitTrans();
     }
 }

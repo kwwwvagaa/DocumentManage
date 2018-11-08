@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\DM.Interface.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -39,13 +40,54 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IBase.cs" />
+    <Compile Include="IBase.T.cs" />
     <Compile Include="IDependency.cs" />
     <Compile Include="IRepository\IRepositoryBase.cs" />
     <Compile Include="IRepository\IRepositoryBase.T.cs" />
+    <Compile Include="IRepository\ISys_AreaRepository.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRepository\ISys_DbBackupRepository.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRepository\ISys_FilterIPRepository.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRepository\ISys_ItemsDetailRepository.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRepository\ISys_ItemsRepository.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRepository\ISys_LogRepository.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRepository\ISys_ModuleButtonRepository.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRepository\ISys_ModuleFormInstanceRepository.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRepository\ISys_ModuleFormRepository.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRepository\ISys_ModuleRepository.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRepository\ISys_OrganizeRepository.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRepository\ISys_RoleAuthorizeRepository.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+    </Compile>
     <Compile Include="IRepository\ISys_RoleRepository.cs">
       <DependentUpon>Repository.tt</DependentUpon>
     </Compile>
     <Compile Include="IRepository\ISys_TestRepository.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRepository\ISys_UserLogOnRepository.cs">
       <DependentUpon>Repository.tt</DependentUpon>
     </Compile>
     <Compile Include="IRepository\ISys_UserRepository.cs">
@@ -58,15 +100,55 @@
     </Compile>
     <Compile Include="IService\IServiceBase.cs" />
     <Compile Include="IService\IServiceBase.T.cs" />
+    <Compile Include="IService\ISys_AreaService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IService\ISys_DbBackupService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IService\ISys_FilterIPService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IService\ISys_ItemsDetailService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IService\ISys_ItemsService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IService\ISys_LogService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IService\ISys_ModuleButtonService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IService\ISys_ModuleFormInstanceService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IService\ISys_ModuleFormService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IService\ISys_ModuleService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IService\ISys_OrganizeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IService\ISys_RoleAuthorizeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
     <Compile Include="IService\ISys_RoleService.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
     <Compile Include="IService\ISys_TestService.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
+    <Compile Include="IService\ISys_UserLogOnService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
     <Compile Include="IService\ISys_UserService.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
+    <Compile Include="IService\ISys_UserServiceExt.cs" />
     <Compile Include="IService\Services.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\DM.Service.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -44,15 +45,55 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Service.tt</DependentUpon>
     </Compile>
+    <Compile Include="BusinessService\Sys_AreaService.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessService\Sys_DbBackupService.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessService\Sys_FilterIPService.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessService\Sys_ItemsDetailService.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessService\Sys_ItemsService.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessService\Sys_LogService.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessService\Sys_ModuleButtonService.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessService\Sys_ModuleFormInstanceService.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessService\Sys_ModuleFormService.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessService\Sys_ModuleService.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessService\Sys_OrganizeService.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessService\Sys_RoleAuthorizeService.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
     <Compile Include="BusinessService\Sys_RoleService.cs">
       <DependentUpon>Service.tt</DependentUpon>
     </Compile>
     <Compile Include="BusinessService\Sys_TestService.cs">
       <DependentUpon>Service.tt</DependentUpon>
     </Compile>
+    <Compile Include="BusinessService\Sys_UserLogOnService.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
     <Compile Include="BusinessService\Sys_UserService.cs">
       <DependentUpon>Service.tt</DependentUpon>
     </Compile>
+    <Compile Include="BusinessService\Sys_UserServiceExt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceBase.cs" />
     <Compile Include="ServiceBase.T.cs" />
@@ -65,6 +106,10 @@
     <ProjectReference Include="..\DM.Interface\DM.Interface.csproj">
       <Project>{b8e33588-951d-4a51-bf90-eb8ec7ad856b}</Project>
       <Name>DM.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DM.Tools\DM.Tools.csproj">
+      <Project>{b0880bae-22b5-4664-8517-db1f804fd04a}</Project>
+      <Name>DM.Tools</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

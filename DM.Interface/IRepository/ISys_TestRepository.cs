@@ -16,9 +16,9 @@ using DM.Domain;
 namespace DM.Interface.IRepository
 {
     /// <summary>
-    /// 用户表 接口
+    /// Sys_Test 接口
     /// </summary>
-    public partial interface ISys_UserRepository : IRepositoryBase<Sys_User>
+    public interface ISys_TestRepository : IRepositoryBase<Sys_Test>
     {
         
     }

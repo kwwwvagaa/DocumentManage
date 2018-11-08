@@ -13,12 +13,12 @@ using System.Text;
 using System.Threading.Tasks;
 using DM.Domain;
 
-namespace DM.Interface.IRepository
+namespace DM.Interface.IService
 {
     /// <summary>
-    /// 用户表 接口
+    /// 角色表 接口
     /// </summary>
-    public partial interface ISys_UserRepository : IRepositoryBase<Sys_User>
+    public partial interface ISys_RoleService : IServiceBase<Sys_Role>
     {
         
     }

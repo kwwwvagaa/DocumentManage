@@ -16,15 +16,21 @@ using System.Data.Common;
 using DM.Domain;
 using DM.Tools;
 using DM.Interface;
+using DM.Interface.IService;
 using DM.Interface.IRepository;
 
-namespace DM.Repository.BusinessRepository
+namespace DM.Service.BusinessService
 {
     /// <summary>
-    /// 仓储实现：角色表 (Sys_Role)
+    /// 业务实现：角色表 (Sys_Role)
     /// </summary>
-    public partial class Sys_RoleRepository :RepositoryBase<Sys_Role>,  ISys_RoleRepository,IDependency
+    public partial class Sys_RoleService :ServiceBase<Sys_Role>,  ISys_RoleService,IDependency
     {
+       ISys_RoleRepository m_iRepository=null;
+       public Sys_RoleService(ISys_RoleRepository iRepository)
+            : base(iRepository)  //IOC注入Repository
+       {
+       }
         /// <summary>
         /// 插入一个数据
         /// </summary>

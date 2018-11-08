@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\DM.Tools.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -103,6 +104,7 @@
     <Compile Include="GZip.cs" />
     <Compile Include="Json\Json.cs" />
     <Compile Include="Licence.cs" />
+    <Compile Include="Log\DbLogType.cs" />
     <Compile Include="Log\Log4NetHelper.cs" />
     <Compile Include="Mail\MailHelper.cs" />
     <Compile Include="Net\HttpMethods.cs" />

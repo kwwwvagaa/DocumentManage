@@ -1,4 +1,5 @@
-﻿using DM.Interface.IRepository;
+﻿using DM.Interface;
+using DM.Interface.IRepository;
 using DM.Tools;
 using System;
 using System.Collections.Generic;
@@ -16,11 +17,11 @@ namespace DM.Repository
     /// <summary>
     /// 仓储实现
     /// </summary>
-    public class RepositoryBase : IRepositoryBase, IDisposable
+    public class RepositoryBase : IRepositoryBase, IDependency, IDisposable
     {
-        private DMDbContext dbcontext = new DMDbContext();
+        public DMDbContext dbcontext = new DMDbContext();
         private DbTransaction dbTransaction { get; set; }
-        
+
         public IRepositoryBase BeginTrans()
         {
             DbConnection dbConnection = ((IObjectContextAdapter)dbcontext).ObjectContext.Connection;
@@ -34,7 +35,7 @@ namespace DM.Repository
         public IRepositoryBase RollbackTrans()
         {
             try
-            {             
+            {
                 if (dbTransaction != null)
                 {
                     dbTransaction.Rollback();
@@ -48,18 +49,17 @@ namespace DM.Repository
                     this.dbTransaction.Rollback();
                 }
                 throw;
-            }            
-        }      
-        public int Commit()
+            }
+        }
+        public IRepositoryBase CommitTrans()
         {
             try
-            {
-                var returnValue = dbcontext.SaveChanges();
+            {               
                 if (dbTransaction != null)
                 {
                     dbTransaction.Commit();
                 }
-                return returnValue;
+                return this;
             }
             catch (Exception)
             {
@@ -85,7 +85,7 @@ namespace DM.Repository
         public int Insert<TEntity>(TEntity entity) where TEntity : class
         {
             dbcontext.Entry<TEntity>(entity).State = EntityState.Added;
-            return dbTransaction == null ? this.Commit() : 0;
+            return dbcontext.SaveChanges();
         }
         public int Insert<TEntity>(List<TEntity> entitys) where TEntity : class
         {
@@ -93,7 +93,7 @@ namespace DM.Repository
             {
                 dbcontext.Entry<TEntity>(entity).State = EntityState.Added;
             }
-            return dbTransaction == null ? this.Commit() : 0;
+            return dbcontext.SaveChanges();
         }
         public int Update<TEntity>(TEntity entity) where TEntity : class
         {
@@ -108,19 +108,19 @@ namespace DM.Repository
                     dbcontext.Entry(entity).Property(prop.Name).IsModified = true;
                 }
             }
-            return dbTransaction == null ? this.Commit() : 0;
+            return dbcontext.SaveChanges();
         }
         public int Delete<TEntity>(TEntity entity) where TEntity : class
         {
             dbcontext.Set<TEntity>().Attach(entity);
             dbcontext.Entry<TEntity>(entity).State = EntityState.Deleted;
-            return dbTransaction == null ? this.Commit() : 0;
+            return dbcontext.SaveChanges();
         }
         public int Delete<TEntity>(Expression<Func<TEntity, bool>> predicate) where TEntity : class
         {
             var entitys = dbcontext.Set<TEntity>().Where(predicate).ToList();
             entitys.ForEach(m => dbcontext.Entry<TEntity>(m).State = EntityState.Deleted);
-            return dbTransaction == null ? this.Commit() : 0;
+            return dbcontext.SaveChanges();
         }
         public TEntity FindEntity<TEntity>(object keyValue) where TEntity : class
         {
@@ -204,6 +204,6 @@ namespace DM.Repository
         }
 
 
-     
+
     }
 }

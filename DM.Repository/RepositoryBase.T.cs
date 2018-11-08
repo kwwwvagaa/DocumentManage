@@ -1,4 +1,5 @@
-﻿//*******************************************
+﻿using DM.Interface;
+//*******************************************
 // 版权所有 黄正辉
 // 文件名称：RepositoryBase.T.cs
 // 作　　者：黄正辉
@@ -10,8 +11,10 @@ using DM.Interface.IRepository;
 using DM.Tools;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -23,9 +26,71 @@ namespace DM.Repository
     /// 仓储实现
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : class,new()
+    public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> ,IDependency where TEntity : class,new()
     {
         public DMDbContext dbcontext = new DMDbContext();
+        private DbTransaction dbTransaction { get; set; }
+
+        public IRepositoryBase<TEntity> BeginTrans()
+        {
+            DbConnection dbConnection = ((IObjectContextAdapter)dbcontext).ObjectContext.Connection;
+            if (dbConnection.State == ConnectionState.Closed)
+            {
+                dbConnection.Open();
+            }
+            dbTransaction = dbConnection.BeginTransaction();
+            return this;
+        }
+        public IRepositoryBase<TEntity> RollbackTrans()
+        {
+            try
+            {
+                if (dbTransaction != null)
+                {
+                    dbTransaction.Rollback();
+                }
+                return this;
+            }
+            catch (Exception)
+            {
+                if (dbTransaction != null)
+                {
+                    this.dbTransaction.Rollback();
+                }
+                throw;
+            }
+        }
+        public IRepositoryBase<TEntity> CommitTrans()
+        {
+            try
+            {
+                if (dbTransaction != null)
+                {
+                    dbTransaction.Commit();
+                }
+                return this;
+            }
+            catch (Exception)
+            {
+                if (dbTransaction != null)
+                {
+                    this.dbTransaction.Rollback();
+                }
+                throw;
+            }
+            finally
+            {
+                this.Dispose();
+            }
+        }
+        public void Dispose()
+        {
+            if (dbTransaction != null)
+            {
+                this.dbTransaction.Dispose();
+            }
+            this.dbcontext.Dispose();
+        }
         public int Insert(TEntity entity)
         {
             dbcontext.Entry<TEntity>(entity).State = EntityState.Added;

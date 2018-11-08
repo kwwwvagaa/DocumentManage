@@ -18,7 +18,7 @@ namespace DM.Interface.IService
     /// <summary>
     /// 用户表 接口
     /// </summary>
-    public interface ISys_UserService : IServiceBase<Sys_User>
+    public partial interface ISys_UserService : IServiceBase<Sys_User>
     {
         
     }

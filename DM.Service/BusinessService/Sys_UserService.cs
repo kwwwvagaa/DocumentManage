@@ -17,14 +17,20 @@ using DM.Domain;
 using DM.Tools;
 using DM.Interface;
 using DM.Interface.IService;
+using DM.Interface.IRepository;
 
-namespace DM.Service.BusinessRepository
+namespace DM.Service.BusinessService
 {
     /// <summary>
     /// 业务实现：用户表 (Sys_User)
     /// </summary>
     public partial class Sys_UserService :ServiceBase<Sys_User>,  ISys_UserService,IDependency
     {
+       ISys_UserRepository m_iRepository=null;
+       public Sys_UserService(ISys_UserRepository iRepository)
+            : base(iRepository)  //IOC注入Repository
+       {
+       }
         /// <summary>
         /// 插入一个数据
         /// </summary>

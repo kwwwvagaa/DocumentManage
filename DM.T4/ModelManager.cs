@@ -189,16 +189,17 @@ where  object_name(b.parent_object_id)!=object_name(b.referenced_object_id)";
         /// SQL[不完善,需要的自己改造]
         /// </summary>
         /// <param name="type"></param>
+        /// <param name="canNull"></param>
         /// <returns></returns>
-        public string TransFromSqlType(string type)
+        public string TransFromSqlType(string type,string canNull)
         {
             type = type.ToLower();
-
+            string strNull = canNull == "1" ? "?" : "";
             switch (type)
             {
-                case "int": return "int";
-                case "bigint": return "Int64";
-                case "smallint": return "Int16";
+                case "int": return "int" + strNull;
+                case "bigint": return "Int64" + strNull;
+                case "smallint": return "Int16" + strNull;
                 case "text":
                 case "char":
                 case "nchar":
@@ -208,18 +209,18 @@ where  object_name(b.parent_object_id)!=object_name(b.referenced_object_id)";
                 case "varbinary":
                 case "image":
                 case "binary": return "Byte[]";
-                case "tinyint": return "byte";
-                case "bit": return "bool";
+                case "tinyint": return "byte" + strNull;
+                case "bit": return "bool" + strNull;
                 case "date":
                 case "time":
                 case "smalldatetime":
                 case "timestamp":
-                case "datetime": return "DateTime";
+                case "datetime": return "DateTime" + strNull;
                 case "money":
                 case "numeric":
                 case "smallmoney":
-                case "decimal": return "decimal";
-                case "float": return "double";
+                case "decimal": return "decimal" + strNull;
+                case "float": return "double" + strNull;
                 case "real": return "Single";
                 default: return "string";
             }
