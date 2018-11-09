@@ -45,6 +45,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Service.tt</DependentUpon>
     </Compile>
+    <Compile Include="BusinessService\sysdiagramsService.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
     <Compile Include="BusinessService\Sys_AreaService.cs">
       <DependentUpon>Service.tt</DependentUpon>
     </Compile>
@@ -63,6 +66,7 @@
     <Compile Include="BusinessService\Sys_LogService.cs">
       <DependentUpon>Service.tt</DependentUpon>
     </Compile>
+    <Compile Include="BusinessService\Sys_LogServiceExt.cs" />
     <Compile Include="BusinessService\Sys_ModuleButtonService.cs">
       <DependentUpon>Service.tt</DependentUpon>
     </Compile>

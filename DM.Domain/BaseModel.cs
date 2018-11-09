@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DM.Tools;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace DM.Domain
 {
-    public class BaseModel
-    {
+    public class BaseModel 
+    {      
         /// <summary>
         /// 功能描述:属性Get前
         /// 作　　者:黄正辉

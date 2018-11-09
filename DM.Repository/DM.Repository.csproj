@@ -57,6 +57,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Repository.tt</DependentUpon>
     </Compile>
+    <Compile Include="BusinessRepository\sysdiagramsRepository.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+    </Compile>
     <Compile Include="BusinessRepository\Sys_AreaRepository.cs">
       <DependentUpon>Repository.tt</DependentUpon>
     </Compile>

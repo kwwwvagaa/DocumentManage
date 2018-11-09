@@ -167,7 +167,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\AutofacContainer.cs" />
-    <Compile Include="App_Start\HandlerAjaxOnlyAttribute.cs" />
+    <Compile Include="App_Start\Handle\HandlerAjaxOnlyAttribute.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
@@ -470,6 +470,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Login\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configs\system.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
