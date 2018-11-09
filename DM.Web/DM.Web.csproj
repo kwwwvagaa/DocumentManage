@@ -168,8 +168,15 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\AutofacContainer.cs" />
     <Compile Include="App_Start\Handle\HandlerAjaxOnlyAttribute.cs" />
+    <Compile Include="App_Start\Handle\HandlerAuthorizeAttribute.cs" />
+    <Compile Include="App_Start\Handle\HandlerLoginAttribute.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\SystemManage\SystemManageAreaRegistration.cs" />
+    <Compile Include="Controllers\ClientsDataController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Areas\SystemManage\Controllers\OrganizeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -473,6 +480,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Configs\system.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\SystemManage\Views\Organize\Details.cshtml" />
+    <Content Include="Areas\SystemManage\Views\Organize\Form.cshtml" />
+    <Content Include="Areas\SystemManage\Views\Organize\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\SystemManage\Views\Web.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

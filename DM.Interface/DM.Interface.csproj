@@ -128,6 +128,7 @@
     <Compile Include="IService\ISys_ModuleButtonService.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
+    <Compile Include="IService\ISys_ModuleButtonServiceExt.cs" />
     <Compile Include="IService\ISys_ModuleFormInstanceService.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
@@ -137,15 +138,19 @@
     <Compile Include="IService\ISys_ModuleService.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
+    <Compile Include="IService\ISys_ModuleServiceExt.cs" />
     <Compile Include="IService\ISys_OrganizeService.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
+    <Compile Include="IService\ISys_OrganizeServiceExt.cs" />
     <Compile Include="IService\ISys_RoleAuthorizeService.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
+    <Compile Include="IService\ISys_RoleAuthorizeServiceExt.cs" />
     <Compile Include="IService\ISys_RoleService.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
+    <Compile Include="IService\ISys_RoleServiceExt.cs" />
     <Compile Include="IService\ISys_TestService.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>

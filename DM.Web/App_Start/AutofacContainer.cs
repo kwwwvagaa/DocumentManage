@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace DM.Web.App_Start
+namespace DM.Web
 {
     public class AutofacContainer
     {

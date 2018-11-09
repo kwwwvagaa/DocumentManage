@@ -70,6 +70,7 @@
     <Compile Include="BusinessService\Sys_ModuleButtonService.cs">
       <DependentUpon>Service.tt</DependentUpon>
     </Compile>
+    <Compile Include="BusinessService\Sys_ModuleButtonServiceExt.cs" />
     <Compile Include="BusinessService\Sys_ModuleFormInstanceService.cs">
       <DependentUpon>Service.tt</DependentUpon>
     </Compile>
@@ -79,15 +80,19 @@
     <Compile Include="BusinessService\Sys_ModuleService.cs">
       <DependentUpon>Service.tt</DependentUpon>
     </Compile>
+    <Compile Include="BusinessService\Sys_ModuleServiceExt.cs" />
     <Compile Include="BusinessService\Sys_OrganizeService.cs">
       <DependentUpon>Service.tt</DependentUpon>
     </Compile>
+    <Compile Include="BusinessService\Sys_OrganizeServiceExt.cs" />
     <Compile Include="BusinessService\Sys_RoleAuthorizeService.cs">
       <DependentUpon>Service.tt</DependentUpon>
     </Compile>
+    <Compile Include="BusinessService\Sys_RoleAuthorizeServiceExt.cs" />
     <Compile Include="BusinessService\Sys_RoleService.cs">
       <DependentUpon>Service.tt</DependentUpon>
     </Compile>
+    <Compile Include="BusinessService\Sys_RoleServiceExt.cs" />
     <Compile Include="BusinessService\Sys_TestService.cs">
       <DependentUpon>Service.tt</DependentUpon>
     </Compile>
