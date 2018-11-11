@@ -26,7 +26,7 @@ namespace DM.Repository
     /// 仓储实现
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> ,IDependency where TEntity : class,new()
+    public class RepositoryBase<TEntity> : IRepositoryBase<TEntity>, IDependency where TEntity : class,new()
     {
         public DMDbContext dbcontext = new DMDbContext();
         private DbTransaction dbTransaction { get; set; }
@@ -211,5 +211,51 @@ namespace DM.Repository
             tempData = tempData.Skip<TEntity>(pagination.rows * (pagination.page - 1)).Take<TEntity>(pagination.rows).AsQueryable();
             return tempData.ToList();
         }
+
+
+        public DataTable QueryTable(string strSql, DbParameter[] dbParameter = null)
+        {
+            System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection();
+            conn = (System.Data.SqlClient.SqlConnection)dbcontext.Database.Connection;
+            System.Data.SqlClient.SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = strSql;
+            cmd.Parameters.AddRange(dbParameter);
+
+            conn.Open();
+            System.Data.SqlClient.SqlDataAdapter adapter = new System.Data.SqlClient.SqlDataAdapter(cmd);
+            DataTable table = new DataTable();
+            adapter.Fill(table);
+            cmd.Parameters.Clear();
+            conn.Close();//连接需要关闭
+            return table;
+        }
+
+        public int ExecuteSql(string strSql, DbParameter[] dbParameter = null)
+        {
+            System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection();
+            conn = (System.Data.SqlClient.SqlConnection)dbcontext.Database.Connection;
+            System.Data.SqlClient.SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = strSql;
+            cmd.Parameters.AddRange(dbParameter);
+            conn.Open();
+            int result = cmd.ExecuteNonQuery();
+            cmd.Parameters.Clear();
+            conn.Close();//连接需要关闭
+            return result;
+        }
+        public object ExecuteScalar(string strSql, DbParameter[] dbParameter = null)
+        {
+            System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection();
+            conn = (System.Data.SqlClient.SqlConnection)dbcontext.Database.Connection;
+            System.Data.SqlClient.SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = strSql;
+            cmd.Parameters.AddRange(dbParameter);
+            conn.Open();
+            object result = cmd.ExecuteScalar();
+            cmd.Parameters.Clear();
+            conn.Close();//连接需要关闭
+            return result;
+        }
+
     }
 }

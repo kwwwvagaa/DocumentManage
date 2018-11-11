@@ -24,6 +24,6 @@ namespace DM.Interface.IService
     /// </summary>
     public interface IServiceBase : IBase
     {
-
+        string GetTableList(Pagination pagination, Dictionary<string, string> searchdata); 
     }
 }

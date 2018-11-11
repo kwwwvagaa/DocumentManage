@@ -85,6 +85,19 @@
       <DependentUpon>Service.tt</DependentUpon>
     </Compile>
     <Compile Include="BusinessService\Sys_OrganizeServiceExt.cs" />
+    <Compile Include="BusinessService\Sys_PageIndexSearchService.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessService\Sys_PageIndexService.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessService\Sys_PageIndexServiceExt.cs" />
+    <Compile Include="BusinessService\Sys_PageIndexTableColumnsService.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessService\Sys_PageIndexToolService.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
     <Compile Include="BusinessService\Sys_RoleAuthorizeService.cs">
       <DependentUpon>Service.tt</DependentUpon>
     </Compile>

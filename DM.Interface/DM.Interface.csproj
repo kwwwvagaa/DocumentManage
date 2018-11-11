@@ -81,6 +81,18 @@
     <Compile Include="IRepository\ISys_OrganizeRepository.cs">
       <DependentUpon>Repository.tt</DependentUpon>
     </Compile>
+    <Compile Include="IRepository\ISys_PageIndexRepository.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRepository\ISys_PageIndexSearchRepository.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRepository\ISys_PageIndexTableColumnsRepository.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRepository\ISys_PageIndexToolRepository.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+    </Compile>
     <Compile Include="IRepository\ISys_RoleAuthorizeRepository.cs">
       <DependentUpon>Repository.tt</DependentUpon>
     </Compile>
@@ -143,6 +155,18 @@
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
     <Compile Include="IService\ISys_OrganizeServiceExt.cs" />
+    <Compile Include="IService\ISys_PageIndexSearchService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IService\ISys_PageIndexService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IService\ISys_PageIndexTableColumnsService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IService\ISys_PageIndexToolService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
     <Compile Include="IService\ISys_RoleAuthorizeService.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>

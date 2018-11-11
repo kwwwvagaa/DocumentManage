@@ -93,6 +93,18 @@
     <Compile Include="BusinessRepository\Sys_OrganizeRepository.cs">
       <DependentUpon>Repository.tt</DependentUpon>
     </Compile>
+    <Compile Include="BusinessRepository\Sys_PageIndexRepository.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessRepository\Sys_PageIndexSearchRepository.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessRepository\Sys_PageIndexTableColumnsRepository.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessRepository\Sys_PageIndexToolRepository.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+    </Compile>
     <Compile Include="BusinessRepository\Sys_RoleAuthorizeRepository.cs">
       <DependentUpon>Repository.tt</DependentUpon>
     </Compile>

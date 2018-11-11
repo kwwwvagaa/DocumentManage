@@ -94,6 +94,18 @@
     <Compile Include="Sys_Organize.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+    <Compile Include="Sys_PageIndex.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_PageIndexSearch.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_PageIndexTableColumns.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_PageIndexTool.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Sys_Role.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>

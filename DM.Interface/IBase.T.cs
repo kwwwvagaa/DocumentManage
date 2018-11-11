@@ -24,5 +24,9 @@ namespace DM.Interface
         List<TEntity> FindList(string strSql, DbParameter[] dbParameter);
         List<TEntity> FindList(Pagination pagination);
         List<TEntity> FindList(Expression<Func<TEntity, bool>> predicate, Pagination pagination);
+        System.Data.DataTable QueryTable(string strSql, DbParameter[] dbParameter = null);
+        int ExecuteSql(string strSql, DbParameter[] dbParameter = null);
+        object ExecuteScalar(string strSql, DbParameter[] dbParameter = null);
+     
     }
 }

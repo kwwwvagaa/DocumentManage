@@ -119,7 +119,7 @@ if(lstzjTables!=null&&lstzjTables.Count>0)
     {
 #>	  
 	   private <#=tb.ZJ_Table#> _<#=tb.ZJ_Table#> ;    
-       [ForeignKey(" <#=tb.WJ_Field#>")] 
+       [ForeignKey("<#=tb.WJ_Field#>")] 
        public <#=tb.ZJ_Table#> <#=tb.ZJ_Table#>
 	   { 
             get

@@ -39,6 +39,7 @@ namespace DM.Web
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
             m_container = container;
+            DM.Tools.Web.AutofacContainer.Container = container;
         }
 
         /// <summary>

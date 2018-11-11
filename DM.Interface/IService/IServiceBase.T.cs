@@ -21,6 +21,6 @@ namespace DM.Interface.IService
     /// <typeparam name="TEntity">实体类型</typeparam>
     public interface IServiceBase<TEntity> : IBase<TEntity> where TEntity : class,new()
     {
-
+        string GetTableList(Pagination pagination, Dictionary<string, string> searchdata); 
     }
 }

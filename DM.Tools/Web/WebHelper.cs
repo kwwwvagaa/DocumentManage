@@ -394,5 +394,10 @@ namespace DM.Tools
             return html;
         }
         #endregion
+
+        public static string GetDicValue(string strParent, string strKey)
+        {
+            return strKey;
+        }
     }
 }
