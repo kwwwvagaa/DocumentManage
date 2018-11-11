@@ -1,0 +1,270 @@
+﻿@using System.Linq;
+@using System.Linq.Expressions;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+}
+@{
+    DM.Domain.Sys_PageIndex PageConfig = ViewBag.PageConfig;
+}
+
+<script>
+    $(function () {
+        $('#layout').layout();
+        @{
+           System.Text.StringBuilder strInit=new System.Text.StringBuilder();
+
+    if (PageConfig.F_Type == "LeftTreeRightTable")
+    {
+
+        strInit.AppendLine("treeView();");
+}
+    strInit.AppendLine("gridList();");
+}
+        @strInit.ToString()
+        $('#btn_search').trigger("click");
+    });
+    @{
+    {
+        <text>
+    function treeView() {
+        $("#itemTree").treeview({
+            url: "@PageConfig.F_LeftTreeDataUrl",
+            onnodeclick: function (item) {
+                var itemId = $("#itemTree").getCurrentNode().id;
+                $("@PageConfig.F_LeftTreeNodeValueToField").val(itemId);
+                $("#txt_keyword").val('');
+                $('#btn_search').trigger("click");
+            }
+        });
+    }
+    </text>
+    }
+}
+    function gridList() {
+        var $gridList = $("#gridList");
+        $gridList.dataGrid({
+            viewrecords: true,
+            multiselect: true,
+            pager: "#gridPager",
+            height: $(window).height() - 178,
+            url: "@PageConfig.F_DataUrl",
+            postData:  {
+                searchdata:$("#formSearch").formSerialize()
+            },
+            colModel: [
+@{
+    int intColumnsCount=PageConfig.LstSys_PageIndexTableColumnss.Count;
+        for (int i = 0; i <intColumnsCount ; i++)
+        {
+            <text>
+        {
+            label: "@PageConfig.LstSys_PageIndexTableColumnss[i].F_FieldName",
+            name: "@PageConfig.LstSys_PageIndexTableColumnss[i].F_Field",
+            width: "@PageConfig.LstSys_PageIndexTableColumnss[i].F_Width",
+            align: "@PageConfig.LstSys_PageIndexTableColumnss[i].F_Aligh"
+            @(PageConfig.LstSys_PageIndexTableColumnss[i].F_IsHidden == 1 ? ",hidden: true" : "")
+            @(PageConfig.LstSys_PageIndexTableColumnss[i].F_IsKey == 1 ? ", key: true " : "")
+            @{
+                if (PageConfig.LstSys_PageIndexTableColumnss[i].F_FormatterType == "Bool")
+        {
+                    <text>,
+            formatter: function (cellvalue) {
+                return cellvalue > 0 ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                </text>
+        }
+        else  if (PageConfig.LstSys_PageIndexTableColumnss[i].F_FormatterType == "Date")
+        {
+            if (!string.IsNullOrEmpty(PageConfig.LstSys_PageIndexTableColumnss[i].F_FormatterForDate))
+            {
+                @:, formatter: "date", formatoptions: { srcformat: '@PageConfig.LstSys_PageIndexTableColumnss[i].F_FormatterForDate', newformat: '@PageConfig.LstSys_PageIndexTableColumnss[i].F_FormatterForDate' }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            }
+        }
+    else if (PageConfig.LstSys_PageIndexTableColumnss[i].F_FormatterType == "Dic")
+        {}
+    else if(!string.IsNullOrEmpty( PageConfig.LstSys_PageIndexTableColumnss[i].F_Formatter))
+        {
+            <text>, formatter: function (cellvalue) {
+                    return  @PageConfig.LstSys_PageIndexTableColumnss[i].F_Formatter;
+                }
+                </text>
+        }
+    }
+            }
+            @(i != intColumnsCount-1 ? "," : "")
+            </text>
+
+    }
+            @:]});
+                                                                                                                                                                                                                                }
+
+
+
+
+
+        $("#btn_search").click(function () {
+            $gridList.jqGrid('setGridParam', {
+                url: "@PageConfig.F_DataUrl",
+                postData:  {
+                    searchdata:$("#formSearch").formSerialize()
+                },
+            }).trigger('reloadGrid');
+        });
+    }
+
+    function btn_add() {
+        var itemId = $("#itemTree").getCurrentNode().id;
+        var itemName = $("#itemTree").getCurrentNode().text;
+        if (!itemId) {
+            return false;
+        }
+        $.modalOpen({
+            id: "Form",
+            title: itemName + " 》新增字典",
+            url: "/SystemManage/ItemsData/Form?itemId=" + itemId,
+            width: "450px",
+            height: "350px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_edit() {
+        var itemName = $("#itemTree").getCurrentNode().text;
+        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        $.modalOpen({
+            id: "Form",
+            title: itemName + " 》修改字典",
+            url: "/SystemManage/ItemsData/Form?keyValue=" + keyValue,
+            width: "450px",
+            height: "350px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_delete() {
+        $.deleteForm({
+            url: "/SystemManage/ItemsData/DeleteForm",
+            param: { keyValue: $("#gridList").jqGridRowValue().F_Id },
+            success: function () {
+                $("#gridList").resetSelection();
+                $("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+    function btn_details() {
+        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        $.modalOpen({
+            id: "Details",
+            title: "查看字典",
+            url: "/SystemManage/ItemsData/Details?keyValue=" + keyValue,
+            width: "450px",
+            height: "470px",
+            btn: null,
+        });
+    }
+    function btn_itemstype() {
+        $.modalOpen({
+            id: "ItemsType",
+            title: "字典分类",
+            url: "/SystemManage/ItemsType/Index",
+            width: "800px",
+            height: "550px",
+            btn: null,
+        });
+    }
+</script>
+<div class="ui-layout" id="layout" style="height: 100%; width: 100%;">
+    @{  if (PageConfig.F_Type == "LeftTreeRightTable")
+      {
+        <text>
+            <div class="ui-layout-west">
+                <div id="itemTree"></div>
+            </div>
+        </text>
+      }
+    }
+    <div class="ui-layout-center">
+        @{
+            if (PageConfig.LstSys_PageIndexTools != null && PageConfig.LstSys_PageIndexTools.Count > 0)
+            {
+                System.Text.StringBuilder strTools = new System.Text.StringBuilder();
+                @:<div class="topPanel" style="padding-left:10px">
+                foreach (var item in PageConfig.LstSys_PageIndexTools)
+                {
+                    <text>
+                        <div class="btn-group">
+                            <a class="btn btn-primary" id="@item.F_ID" onclick="@item.F_ClickEvent"><i class="@item.F_Icon "></i>@item.F_Name</a>
+                        </div>
+                    </text>                   
+                }
+                @:</div>
+            }
+        }
+
+        <div class="topPanel">
+            <div class="search" style="padding-left: 0px;">
+                <table>
+                    <tr>
+                        <td>
+                            <div class=" input-group">
+                                <form id="formSearch">
+                                    @Html.Hidden("modelid", PageConfig.F_ID)
+                                    @{
+                                        if (PageConfig.F_Type == "LeftTreeRightTable")
+                                        {
+                                            Html.Hidden(@PageConfig.F_LeftTreeNodeValueToField, "");
+                                        }
+                                    }
+                                    @{
+                                        if (PageConfig.LstSys_PageIndexSearchs != null && PageConfig.LstSys_PageIndexSearchs.Count > 0)
+                                        {
+                                            foreach (var item in PageConfig.LstSys_PageIndexSearchs)
+                                            {
+                                                @Html.Label(item.F_Field, " " + item.F_Text + "：", new Dictionary<string, object>() { { "style", "float: left;margin-left:10px" } });
+                                        @Html.TextBox(item.F_Field, "", new Dictionary<string, object>() { { "style", "width: 200px;" }, { "class", "form-control" }, { "placeholder", item.F_PromptText } });
+                                            }
+                                        }
+                                    }
+
+                                </form>
+                                <span class="input-group-btn">
+                                    <button id="btn_search" type="button" class="btn  btn-primary"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="gridPanel">
+            <table id="gridList"></table>
+            <div id="gridPager"></div>
+        </div>
+    </div>
+</div>
+<script>
+    @{
+    if (PageConfig.LstSys_PageIndexTools != null && PageConfig.LstSys_PageIndexTools.Count > 0 )
+    {
+      var lstEvents=  PageConfig.LstSys_PageIndexTools.FindAll(p => !string.IsNullOrEmpty(p.F_BindEvent));
+        if(lstEvents!=null&&lstEvents.Count>0)
+        {
+         <text>
+    $(function () {
+        @{
+            foreach (var item in lstEvents)
+            {
+                @:$("#@item.F_ID")@Html.Raw(item.F_BindEvent);
+            }
+            }
+    });
+    </text>
+        }
+
+    }
+}
+
+</script>

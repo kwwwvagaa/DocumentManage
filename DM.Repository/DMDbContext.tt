@@ -1,0 +1,56 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="System.Data" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="$(TargetDir)DM.T4.dll"#>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Data" #>
+<#@ import namespace="System.Data.SqlClient" #>
+<#@ import namespace="System.Collections.Generic"#>
+<#@ import namespace="System.Text.RegularExpressions"#>
+<#@ import namespace="DM.T4"#>
+<#@ include file="$(TargetDir)ModelAuto.ttinclude"#>
+<# 
+    var manager2 = new Manager(Host, GenerationEnvironment, true) { OutputPath = Path.GetDirectoryName(Host.TemplateFile)}; 
+    ModelManager manager = new ModelManager();
+    List<string> list=manager.GetTableList();
+    manager2.StartBlock("DMDbContext.cs");
+#>
+
+using System.Data.Entity;
+using DM.Domain;
+
+namespace DM.Repository
+{
+    public partial class DMDbContext : DbContext
+    {
+        public DMDbContext()
+            : base("DMDbContext")
+        {
+            this.Configuration.AutoDetectChangesEnabled = false;
+            this.Configuration.ValidateOnSaveEnabled = false;
+            this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;
+       
+        }
+<#
+    foreach (var item in list)
+    {
+        string tableName=item;
+#>
+        public DbSet<<#=tableName #>> <#=tableName #>s { get; set; }
+<#
+    }
+#>
+
+        
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
+
+        
+    }
+}
