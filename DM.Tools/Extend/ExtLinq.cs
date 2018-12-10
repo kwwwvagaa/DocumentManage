@@ -8,37 +8,200 @@ namespace DM.Tools
 {
     public static partial class ExtLinq
     {
-        public static Expression Property(this Expression expression, string propertyName)
+       /// <summary>
+        /// 创建lambda表达式：p=>true
+        /// </summary>
+        /// <typeparam name="T">对象名称（类名）</typeparam>
+        /// <returns></returns>
+        public static Expression<Func<T, bool>> True<T>()
         {
-            return Expression.Property(expression, propertyName);
+            return p => true;
         }
-        public static Expression AndAlso(this Expression left, Expression right)
+
+        /// <summary>
+        /// 创建lambda表达式：p=>false
+        /// </summary>
+        /// <typeparam name="T">对象名称（类名）</typeparam>
+        /// <returns></returns>
+        public static Expression<Func<T, bool>> False<T>()
         {
-            return Expression.AndAlso(left, right);
+            return p => false;
         }
-        public static Expression Call(this Expression instance, string methodName, params Expression[] arguments)
+
+        /// <summary>
+        /// 创建lambda表达式：p=>p.propertyName
+        /// </summary>
+        /// <typeparam name="T">对象名称（类名）</typeparam>
+        /// <typeparam name="TKey">参数类型</typeparam>
+        /// <param name="propertyName">字段名称（数据库中字段名称）</param>
+        /// <returns></returns>
+        public static Expression<Func<T, TKey>> GetOrderExpression<T, TKey>(string propertyName)
         {
-            return Expression.Call(instance, instance.Type.GetMethod(methodName), arguments);
+            ParameterExpression parameter = Expression.Parameter(typeof(T), "p");
+            return Expression.Lambda<Func<T, TKey>>(Expression.Property(parameter, propertyName), parameter);
         }
-        public static Expression GreaterThan(this Expression left, Expression right)
+
+        /// <summary>
+        /// 创建lambda表达式：p=>p.propertyName == propertyValue
+        /// </summary>
+        /// <typeparam name="T">对象名称（类名）</typeparam>
+        /// <param name="propertyName">字段名称（数据库中字段名称）</param>
+        /// <param name="propertyValue">数据值</param>
+        /// <returns></returns>
+        public static Expression<Func<T, bool>> CreateEqual<T>(string propertyName, object propertyValue, Type typeValue)
         {
-            return Expression.GreaterThan(left, right);
+            ParameterExpression parameter = Expression.Parameter(typeof(T), "p");//创建参数p
+            MemberExpression member = Expression.PropertyOrField(parameter, propertyName);
+            ConstantExpression constant = Expression.Constant(propertyValue, typeValue);//创建常数
+            return Expression.Lambda<Func<T, bool>>(Expression.Equal(member, constant), parameter);
         }
-        public static Expression<T> ToLambda<T>(this Expression body, params  ParameterExpression[] parameters)
+
+        /// <summary>
+        /// 创建lambda表达式：p=>p.propertyName != propertyValue
+        /// </summary>
+        /// <typeparam name="T">对象名称（类名）</typeparam>
+        /// <param name="propertyName">字段名称（数据库中字段名称）</param>
+        /// <param name="propertyValue">数据值</param>
+        /// <returns></returns>
+        public static Expression<Func<T, bool>> CreateNotEqual<T>(string propertyName, object propertyValue, Type typeValue)
         {
-            return Expression.Lambda<T>(body, parameters);
+            ParameterExpression parameter = Expression.Parameter(typeof(T), "p");//创建参数p
+            MemberExpression member = Expression.PropertyOrField(parameter, propertyName);
+            ConstantExpression constant = Expression.Constant(propertyValue, typeValue);//创建常数
+            return Expression.Lambda<Func<T, bool>>(Expression.NotEqual(member, constant), parameter);
         }
-        public static Expression<Func<T, bool>> True<T>() { return param => true; }
-        public static Expression<Func<T, bool>> False<T>() { return param => false; }
-        public static Expression<Func<T, bool>> And<T>(this Expression<Func<T, bool>> first, Expression<Func<T, bool>> second)
+
+        /// <summary>
+        /// 创建lambda表达式：p=>p.propertyName > propertyValue
+        /// </summary>
+        /// <typeparam name="T">对象名称（类名）</typeparam>
+        /// <param name="propertyName">字段名称（数据库中字段名称）</param>
+        /// <param name="propertyValue">数据值</param>
+        /// <returns></returns>
+        public static Expression<Func<T, bool>> CreateGreaterThan<T>(string propertyName, object propertyValue, Type typeValue)
         {
-            return first.Compose(second, Expression.AndAlso);
+            ParameterExpression parameter = Expression.Parameter(typeof(T), "p");//创建参数p
+            MemberExpression member = Expression.PropertyOrField(parameter, propertyName);
+            ConstantExpression constant = Expression.Constant(propertyValue, typeValue);//创建常数
+            return Expression.Lambda<Func<T, bool>>(Expression.GreaterThan(member, constant), parameter);
         }
-        public static Expression<Func<T, bool>> Or<T>(this Expression<Func<T, bool>> first, Expression<Func<T, bool>> second)
+
+        /// <summary>
+        /// 创建lambda表达式：p=>p.propertyName小于propertyValue 
+        /// </summary>
+        /// <typeparam name="T">对象名称（类名）</typeparam>
+        /// <param name="propertyName">字段名称（数据库中字段名称）</param>
+        /// <param name="propertyValue">数据值</param>
+        /// <returns></returns>
+        public static Expression<Func<T, bool>> CreateLessThan<T>(string propertyName, object propertyValue, Type typeValue)
         {
-            return first.Compose(second, Expression.OrElse);
+            ParameterExpression parameter = Expression.Parameter(typeof(T), "p");//创建参数p
+            MemberExpression member = Expression.PropertyOrField(parameter, propertyName);
+            ConstantExpression constant = Expression.Constant(propertyValue, typeValue);//创建常数
+            return Expression.Lambda<Func<T, bool>>(Expression.LessThan(member, constant), parameter);
         }
-        public static Expression<T> Compose<T>(this Expression<T> first, Expression<T> second, Func<Expression, Expression, Expression> merge)
+
+        /// <summary>
+        /// 创建lambda表达式：p=>p.propertyName >= propertyValue
+        /// </summary>
+        /// <typeparam name="T">对象名称（类名）</typeparam>
+        /// <param name="propertyName">字段名称（数据库中字段名称）</param>
+        /// <param name="propertyValue">数据值</param>
+        /// <returns></returns>
+        public static Expression<Func<T, bool>> CreateGreaterThanOrEqual<T>(string propertyName, object propertyValue, Type typeValue)
+        {
+            ParameterExpression parameter = Expression.Parameter(typeof(T), "p");//创建参数p
+            MemberExpression member = Expression.PropertyOrField(parameter, propertyName);
+            ConstantExpression constant = Expression.Constant(propertyValue, typeValue);//创建常数
+            return Expression.Lambda<Func<T, bool>>(Expression.GreaterThanOrEqual(member, constant), parameter);
+        }
+
+        /// <summary>
+        /// 创建lambda表达式：p=> p.propertyName 小于= propertyValue 
+        /// </summary>
+        /// <typeparam name="T">对象名称（类名）</typeparam>
+        /// <param name="propertyName">字段名称（数据库中字段名称）</param>
+        /// <param name="propertyValue">数据值</param>
+        /// <returns></returns>
+        public static Expression<Func<T, bool>> CreateLessThanOrEqual<T>(string propertyName, object propertyValue, Type typeValue)
+        {
+            ParameterExpression parameter = Expression.Parameter(typeof(T), "p");//创建参数p
+            MemberExpression member = Expression.PropertyOrField(parameter, propertyName);
+            ConstantExpression constant = Expression.Constant(propertyValue, typeValue);//创建常数
+            return Expression.Lambda<Func<T, bool>>(Expression.LessThanOrEqual(member, constant), parameter);
+        }
+
+        /// <summary>
+        /// 创建lambda表达式：p=>p.propertyName.Contains(propertyValue)
+        /// </summary>
+        /// <typeparam name="T">对象名称（类名）</typeparam>
+        /// <param name="propertyName">字段名称（数据库中字段名称）</param>
+        /// <param name="propertyValue">数据值</param>
+        /// <returns></returns>
+        public static Expression<Func<T, bool>> GetContains<T>(string propertyName, string propertyValue)
+        {
+            ParameterExpression parameter = Expression.Parameter(typeof(T), "p");
+            MemberExpression member = Expression.PropertyOrField(parameter, propertyName);
+            MethodInfo method = typeof(string).GetMethod("Contains", new[] { typeof(string) });
+            ConstantExpression constant = Expression.Constant(propertyValue, typeof(string));
+            return Expression.Lambda<Func<T, bool>>(Expression.Call(member, method, constant), parameter);
+        }
+
+        /// <summary>
+        /// 创建lambda表达式：!(p=>p.propertyName.Contains(propertyValue))
+        /// </summary>
+        /// <typeparam name="T">对象名称（类名）</typeparam>
+        /// <param name="propertyName">字段名称（数据库中字段名称）</param>
+        /// <param name="propertyValue">数据值</param>
+        /// <returns></returns>
+        public static Expression<Func<T, bool>> GetNotContains<T>(string propertyName, string propertyValue)
+        {
+            ParameterExpression parameter = Expression.Parameter(typeof(T), "p");
+            MemberExpression member = Expression.PropertyOrField(parameter, propertyName);
+            MethodInfo method = typeof(string).GetMethod("Contains", new[] { typeof(string) });
+            ConstantExpression constant = Expression.Constant(propertyValue, typeof(string));
+            return Expression.Lambda<Func<T, bool>>(Expression.Not(Expression.Call(member, method, constant)), parameter);
+        }
+
+        /// <summary>
+        /// 功能描述:拼接Or
+        /// 作　　者:beck.huang
+        /// 创建日期:2018-11-30 15:35:10
+        /// 任务编号:好餐谋后台管理系统
+        /// </summary>
+        /// <param name="expression1">expression1</param>
+        /// <param name="expression2">expression2</param>
+        /// <returns>返回值</returns>
+        public static Expression<Func<T, bool>> Or<T>(Expression<Func<T, bool>> expression1, Expression<Func<T, bool>> expression2)
+        {
+            return Compose(expression1, expression2, Expression.OrElse);
+        }
+
+        /// <summary>
+        /// 功能描述:拼接And
+        /// 作　　者:beck.huang
+        /// 创建日期:2018-11-30 15:35:18
+        /// 任务编号:好餐谋后台管理系统
+        /// </summary>
+        /// <param name="expression1">expression1</param>
+        /// <param name="expression2">expression2</param>
+        /// <returns>返回值</returns>
+        public static Expression<Func<T, bool>> And<T>(Expression<Func<T, bool>> expression1, Expression<Func<T, bool>> expression2)
+        {
+            return Compose(expression1, expression2, Expression.AndAlso);
+        }
+
+        /// <summary>
+        /// 功能描述:合并2个表达式
+        /// 作　　者:beck.huang
+        /// 创建日期:2018-11-30 15:35:26
+        /// 任务编号:好餐谋后台管理系统
+        /// </summary>
+        /// <param name="first">first</param>
+        /// <param name="second">second</param>
+        /// <param name="merge">merge</param>
+        /// <returns>返回值</returns>
+        public static Expression<T> Compose<T>(Expression<T> first, Expression<T> second, Func<Expression, Expression, Expression> merge)
         {
             var map = first.Parameters
                 .Select((f, i) => new { f, s = second.Parameters[i] })
